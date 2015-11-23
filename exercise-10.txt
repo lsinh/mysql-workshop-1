@@ -1,0 +1,48 @@
+mysql> create database hotel;
+mysql> use hotel;
+mysql> create table Floors(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY); 
+mysql> alter table Floors add Number INT after id;  
+mysql> alter table Floors add avgWindows INT after Number;
+mysql> alter table Floors add NumofFloorswithRoomsWithCarpets INT after avgWindows;
+mysql> describe Floors;
++---------------------------------+---------+------+-----+---------+----------------+
+| Field                           | Type    | Null | Key | Default | Extra          |
++---------------------------------+---------+------+-----+---------+----------------+
+| id                              | int(11) | NO   | PRI | NULL    | auto_increment |
+| Number                          | int(11) | YES  |     | NULL    |                |
+| avgWindows                      | int(11) | YES  |     | NULL    |                |
+| NumofFloorswithRoomsWithCarpets | int(11) | YES  |     | NULL    |                |
++---------------------------------+---------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+
+mysql> alter table Rooms drop FloorID;
+mysql> alter table Rooms add FloorID INT after id; 
+mysql> alter table Rooms add rentableRooms INT after FloorID;
+mysql> alter table Rooms add NbwithPrivateKitchens INT after rentableRooms;
+mysql> alter table Rooms add availableRooms INT after NbwithPrivateKitchens;
++-----------------------+---------+------+-----+---------+----------------+
+| Field                 | Type    | Null | Key | Default | Extra          |
++-----------------------+---------+------+-----+---------+----------------+
+| id                    | int(11) | NO   | PRI | NULL    | auto_increment |
+| FloorID               | int(11) | YES  |     | NULL    |                |
+| rentableRooms         | int(11) | YES  |     | NULL    |                |
+| NbwithPrivateKitchens | int(11) | YES  |     | NULL    |                |
+| availableRooms        | int(11) | YES  |     | NULL    |                |
++-----------------------+---------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> create table Bookings(id int NOT NULL AUTO_INCREMENT PRIMARY KEY);
+mysql> alter Table Bookings add RoomId INT after id;
+mysql> alter Table Bookings add Checkin DATETIME after ID;  
+mysql> alter Table Bookings add Checkout DATETIME after Checkin;
+mysql> describe Bookings;
++----------+----------+------+-----+---------+----------------+
+| Field    | Type     | Null | Key | Default | Extra          |
++----------+----------+------+-----+---------+----------------+
+| id       | int(11)  | NO   | PRI | NULL    | auto_increment |
+| Checkin  | datetime | YES  |     | NULL    |                |
+| Checkout | datetime | YES  |     | NULL    |                |
+| RoomId   | int(11)  | YES  |     | NULL    |                |
++----------+----------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
