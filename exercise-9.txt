@@ -1,20 +1,60 @@
-$ mysql -ulsinh
-mysql> create database Barn_with_chickens;
-mysql> use Barn_with_chickens;
-mysql> alter table poultry add type enum('hens', 'roosters', 'chicks') after id;
-mysql> alter table Poultry add type enum('hens', 'roosters', 'chicks') after id;  
-mysql> alter table Poultry add numberOfChickensonSpecificDate INT after type;
-mysql> alter table Poultry add numberOfChicksOnSpecificDate INT after numberOfChickensonSpecificDate;
-mysql> alter table Poultry add numberOfChickComingOfAgeOnFutureDate INT after numberOfChicksOnSpecificDate;
-mysql> describe Poultry;
+mysql> alter table Chicks add numberOfMaleChicks INT after name;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
 
-+--------------------------------------+----------------------------------+------+-----+---------+----------------+
-| Field                                | Type                             | Null | Key | Default | Extra          |
-+--------------------------------------+----------------------------------+------+-----+---------+----------------+
-| id                                   | int(11)                          | NO   | PRI | NULL    | auto_increment |
-| type                                 | enum('hens','roosters','chicks') | YES  |     | NULL    |                |
-| numberOfChickensonSpecificDate       | int(11)                          | YES  |     | NULL    |                |
-| numberOfChicksOnSpecificDate         | int(11)                          | YES  |     | NULL    |                |
-| numberOfChickComingOfAgeOnFutureDate | int(11)                          | YES  |     | NULL    |                |
-+--------------------------------------+----------------------------------+------+-----+---------+----------------+
-5 rows in set (0.00 sec)
+mysql> alter table Chicks drop name;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Chicks add id INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe Chicks;
++--------------------+---------+------+-----+---------+----------------+
+| Field              | Type    | Null | Key | Default | Extra          |
++--------------------+---------+------+-----+---------+----------------+
+| numberOfMaleChicks | int(11) | YES  |     | NULL    |                |
+| id                 | int(11) | NO   | PRI | NULL    | auto_increment |
++--------------------+---------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> alter table Chicks add numberOfFemaleChicks INT after numberOfMaleChicks;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Chicks add numberofChicksComingOfAge INT after numberOfFemaleChicks;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe Poultry;
+ERROR 1146 (42S02): Table 'Barn_with_chickens.Poultry' doesn't exist
+mysql> describe Chicks;
++---------------------------+---------+------+-----+---------+----------------+
+| Field                     | Type    | Null | Key | Default | Extra          |
++---------------------------+---------+------+-----+---------+----------------+
+| numberOfMaleChicks        | int(11) | YES  |     | NULL    |                |
+| numberOfFemaleChicks      | int(11) | YES  |     | NULL    |                |
+| numberofChicksComingOfAge | int(11) | YES  |     | NULL    |                |
+| id                        | int(11) | NO   | PRI | NULL    | auto_increment |
++---------------------------+---------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+
+mysql> alter table Roosters_Hens add NumberOfRoosters int after id;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Roosters_Hens add NumberOfHens int after NumberOfRoosters;                                                            
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe Roosters_Hens;
++------------------+---------+------+-----+---------+----------------+
+| Field            | Type    | Null | Key | Default | Extra          |
++------------------+---------+------+-----+---------+----------------+
+| id               | int(11) | NO   | PRI | NULL    | auto_increment |
+| NumberOfRoosters | int(11) | YES  |     | NULL    |                |
+| NumberOfHens     | int(11) | YES  |     | NULL    |                |
++------------------+---------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
