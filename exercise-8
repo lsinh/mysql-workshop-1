@@ -1,0 +1,79 @@
+mysql> use decodemtl_addressbook;
+
+For Account Table:
+
+mysql> alter table Account add id INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
+mysql> alter table Account add email VARCHAR(255) after id;
+mysql> alter table Account add password VARCHAR(40) after email;
+mysql> alter table Account add createdOn DATETIME after password;
+mysql> alter table Account add modifiedOn DATETIME after createdON;
+mysql> alter table Account drop name;
+mysql> describe Account;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| email      | varchar(255) | YES  |     | NULL    |                |
+| password   | varchar(40)  | YES  |     | NULL    |                |
+| createdOn  | datetime     | YES  |     | NULL    |                |
+| modifiedOn | datetime     | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+For AdressBook Table;
+
+mysql> alter table AdressBook ADD id INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
+mysql> alter table AdressBook add accountId INT after id;
+mysql> alter table AdressBook drop name;    //because I'd originally created a name field
+mysql> alter table AdressBook add name VARCHAR(255) after accountId;
+mysql> alter table AdressBook add createdOn DATETIME after name;
+mysql> alter table AdressBook modifiedOn DATETIME after createdOn;
+mysql> describe AdressBook;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| accountId  | int(11)      | YES  |     | NULL    |                |
+| name       | varchar(255) | YES  |     | NULL    |                |
+| createdOn  | datetime     | YES  |     | NULL    |                |
+| modifiedOn | datetime     | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+
+For Entry Table:
+
+mysql> alter table Entry add id INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
+mysql> alter table Entry drop name;
+mysql> alter table Entry add addressBookId INT after id;
+mysql> alter table Entry add firstName VARCHAR(255) after addressBookId;
+mysql> alter table Entry add lastName VARCHAR(255) after firstName;
+mysql> alter table Entry add birthday DATETIME after lastName;  
+mysql> alter table Entry add type ENUM("Home", "Date", "Work")  after birthday;
+mysql> alter table Entry add subtype ENUM("Phone", "Address", "Email")  after type;
+mysql> alter table Entry add contentLineOne VARCHAR(255) after subtype;
+mysql> alter Table Entry add contentLineTwo VARCHAR(255) after contentLineOne;
+mysql> alter Table Entry add contentLineThree VARCHAR(255) after contentLineTwo; 
+
+mysql> describe Entry
+    -> ;
++------------------+---------------------------------+------+-----+---------+----------------+
+| Field            | Type                            | Null | Key | Default | Extra          |
++------------------+---------------------------------+------+-----+---------+----------------+
+| id               | int(11)                         | NO   | PRI | NULL    | auto_increment |
+| addressBookId    | int(11)                         | YES  |     | NULL    |                |
+| firstName        | varchar(255)                    | YES  |     | NULL    |                |
+| lastName         | varchar(255)                    | YES  |     | NULL    |                |
+| birthday         | datetime                        | YES  |     | NULL    |                |
+| type             | enum('Home','Date','Work')      | YES  |     | NULL    |                |
+| subtype          | enum('Phone','Address','Email') | YES  |     | NULL    |                |
+| contentLineOne   | varchar(255)                    | YES  |     | NULL    |                |
+| contentLineTwo   | varchar(255)                    | YES  |     | NULL    |                |
+| contentLineThree | varchar(255)                    | YES  |     | NULL    |                |
++------------------+---------------------------------+------+-----+---------+----------------+
+10 rows in set (0.00 sec)
+
+
+
+
+
