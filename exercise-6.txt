@@ -1,0 +1,14 @@
+$ mysql -ulsinh
+mysql> show databases;
+mysql> use decodemtl_addressbook;
+mysql> drop table Test;
+mysql> show tables;
+
++---------------------------------+
+| Tables_in_decodemtl_addressbook |
++---------------------------------+
+| Account                         |
+| AdressBook                      |
+| Entry                           |
++---------------------------------+
+3 rows in set (0.00 sec)
