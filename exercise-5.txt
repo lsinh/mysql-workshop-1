@@ -1,0 +1,17 @@
+mysql> use decodemtl_addressbook;
+Database changed
+mysql> create table Account(name VARCHAR(25));
+mysql> create table AdressBook(name VARCHAR(25));  
+mysql> create table Entry(name VARCHAR(25));  
+mysql> create table Test(name VARCHAR(25)); 
+mysql> show tables
+    -> ;
++---------------------------------+
+| Tables_in_decodemtl_addressbook |
++---------------------------------+
+| Account                         |
+| AdressBook                      |
+| Entry                           |
+| Test                            |
++---------------------------------+
+4 rows in set (0.00 sec)
